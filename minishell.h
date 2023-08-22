@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 08:11:45 by arthurabel        #+#    #+#             */
-/*   Updated: 2023/08/22 11:09:39 by aabel            ###   ########.fr       */
+/*   Updated: 2023/08/22 11:48:19 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <sys/wait.h>
 
 typedef struct t_data
 {
@@ -31,8 +32,7 @@ typedef struct t_data
 	int		fd[2];
 }			t_data;
 
-// -> main.c
-void	pipex(t_data *data);
-
+void	go_to_pipe(t_data *data);
+int		get_nb_pipe(t_data *data);
 
 #endif
