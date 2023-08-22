@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthurabel <arthurabel@student.42.fr>      +#+  +:+       +#+        */
+/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 11:56:21 by arthurabel        #+#    #+#             */
-/*   Updated: 2023/08/22 08:15:07 by arthurabel       ###   ########.fr       */
+/*   Updated: 2023/08/22 11:07:23 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,69 @@ int	quick_parsing(int ac, char **av, t_data *data)
 		perror("failed to open in/outfile");
 	data->cmd1 = av[2];
 	data->cmd2 = av[3];
+}
+
+int	get_nb_pipe(t_data *data)
+{
+	int		i;
+	t_data	*tmp;
+
+	i = 0;
+	tmp = data;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	return (i);
+}
+
+void	go_to_pipe(t_data *data)
+{
+	int		pipe_fd[2];
+	pid_t	child_pid;
+	int		i;
+	int		prev_pipe_read;
+	int		nb_node; // nb de noeud
+
+	prev_pipe_read = 0;
+	//nb_node = fonction pour calculer ne nombre de noeud
+	i = -1;
+	if (pipe(pipe_fd) == -1)
+	{
+		perror("pipe");
+		return ;
+	}
+	child_pid = fork();
+	if (child_pid == -1)
+	{
+		perror("fork");
+		return ;
+	}
+	//child process
+	if (child_pid == 0)
+	{
+		close(pipe_fd[0]);
+		//connect input to previous read
+		if (i > 0)
+		{
+			dup2(pipe_fd[1], STDIN_FILENO);
+			close(prev_pipe_read);
+		}
+		//connect output to current write
+		if (i < nb_node - 1)
+		{
+			dup2(pipe_fd[1], STDOUT_FILENO);
+		}
+		exec_all(data, i);
+		exit(0);
+	}
+	//parent process
+	else
+	{
+		close (pipe_fd[1]);
+		if (i > 0)
+			close(prev_pipe_read);
+		prev_pipe_read = pipe_fd[0];
+	}
 }

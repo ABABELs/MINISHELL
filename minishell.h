@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthurabel <arthurabel@student.42.fr>      +#+  +:+       +#+        */
+/*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 08:11:45 by arthurabel        #+#    #+#             */
-/*   Updated: 2023/08/22 08:13:02 by arthurabel       ###   ########.fr       */
+/*   Updated: 2023/08/22 11:09:39 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,5 @@ typedef struct t_data
 // -> main.c
 void	pipex(t_data *data);
 
-// ->parsing.c
-int		quick_parsing(int ac, char **av, t_data *data);
-
-// -> process.c
-void	ft_child(t_data *data);
-void	ft_parent(t_data *data);
-
-// -> ft_split.c
-char	**ft_split(char *s, char c);
-char	*create_word(char *s, char c);
-int		count_words(char *s, char c);
-int		is_separator(char c, char c1);
 
 #endif
