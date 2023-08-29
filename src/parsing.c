@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 11:56:21 by arthurabel        #+#    #+#             */
-/*   Updated: 2023/08/22 11:07:23 by aabel            ###   ########.fr       */
+/*   Updated: 2023/08/24 20:17:51 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,41 +55,48 @@ void	go_to_pipe(t_data *data)
 	prev_pipe_read = 0;
 	//nb_node = fonction pour calculer ne nombre de noeud
 	i = -1;
-	if (pipe(pipe_fd) == -1)
+	while (++i < nb_node)
 	{
-		perror("pipe");
-		return ;
-	}
-	child_pid = fork();
-	if (child_pid == -1)
-	{
-		perror("fork");
-		return ;
-	}
-	//child process
-	if (child_pid == 0)
-	{
-		close(pipe_fd[0]);
-		//connect input to previous read
-		if (i > 0)
+		if (pipe(pipe_fd) == -1)
 		{
-			dup2(pipe_fd[1], STDIN_FILENO);
-			close(prev_pipe_read);
+			perror("pipe");
+			return ;
 		}
-		//connect output to current write
-		if (i < nb_node - 1)
+		child_pid = fork();
+		if (child_pid == -1)
 		{
-			dup2(pipe_fd[1], STDOUT_FILENO);
+			perror("fork");
+			return ;
 		}
-		exec_all(data, i);
-		exit(0);
+		//child process
+		if (child_pid == 0)
+		{
+			close(pipe_fd[0]);
+			//connect input to previous read
+			if (i > 0)
+			{
+				dup2(pipe_fd[1], STDIN_FILENO);
+				close(prev_pipe_read);
+			}
+			//connect output to current write
+			if (i < nb_node - 1)
+			{
+				dup2(pipe_fd[1], STDOUT_FILENO);
+			}
+			exec_all(data, i);
+			exit(0);
+		}
+		//parent process
+		else
+		{
+			close (pipe_fd[1]);
+			if (i > 0)
+				close(prev_pipe_read);
+			prev_pipe_read = pipe_fd[0];
+		}
 	}
-	//parent process
-	else
-	{
-		close (pipe_fd[1]);
-		if (i > 0)
-			close(prev_pipe_read);
-		prev_pipe_read = pipe_fd[0];
-	}
+	close(prev_pipe_read);
+	i = -1;
+	while (++i < nb_node)
+		wait(NULL);
 }

@@ -5,31 +5,42 @@
 #                                                     +:+ +:+         +:+      #
 #    By: aabel <aabel@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/08/22 11:37:21 by aabel             #+#    #+#              #
-#    Updated: 2023/08/22 11:43:39 by aabel            ###   ########.fr        #
+#    Created: 2023/07/25 15:27:08 by dilovancand       #+#    #+#              #
+#    Updated: 2023/08/29 13:56:06 by aabel            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
+SOURCES = src/minishell.c src/signal_handler.c src/ft_path_finder.c src/ft_path_finder_utils.c src/ft_parsing_utils.c src/ft_minisplit.c src/ft_minisplit_utils.c src/ft_minialloc.c src/ft_clean_cmd.c src/ft_redirection.c \
+			src/builtins/cd.c \
+			src/builtins/echo.c \
+			src/builtins/pwd.c \
+OBJECTS = $(SOURCES:.c=.o)
 
-SRC = src/main.c \
-		src/parsing.c \
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -g3
 
-FLAGS = -Wall -Wextra -Werror
+LIBFT_LIB = inc/libft/libft.a
+INC_DIR = inc/
+READLINE = $(shell brew --prefix readline)
+RL_INC = -I $(READLINE)/include
+RL_LIB = -L $(READLINE)/lib -lreadline
 
-OBJ = $(SRC:%.c=%.o)
+all: ${NAME}
 
-cc = gcc
+%.o: %.c
+	$(CC) -c $(CFLAGS) $< -o $@  $(RL_INC) -I $(INC_DIR)
 
-all: $(NAME)
-
-$(NAME): $(OBJ)
-				@$(CC) $(FLAGS) -o $(NAME) $(OBJ)
+${NAME}: ${OBJECTS}
+	make -C inc/libft
+	$(CC) $(CFLAGS) -o ${NAME} ${OBJECTS} ${LIBFT_LIB} ${RL_LIB}
 
 clean:
-		@rm -f $(OBJ)
-
+	make -C inc/libft clean
+	rm -f ${OBJECTS}
+	
 fclean: clean
-		@rm -f $(NAME)
+	make -C inc/libft fclean
+	rm -f ${NAME}
 
 re: fclean all
