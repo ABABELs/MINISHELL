@@ -6,7 +6,7 @@
 /*   By: aabel <aabel@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:56:03 by aabel             #+#    #+#             */
-/*   Updated: 2023/08/29 15:06:43 by aabel            ###   ########.fr       */
+/*   Updated: 2023/08/29 15:32:33 by aabel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,25 @@ void	echo(char **compare, t_space *space)
 		k = 0;
 	}
 	printf("\n");
+}
+
+void	exec_echo(t_space *space)
+{
+	t_core *current;
+
+	current = space->crust->content;
+	while (current)
+	{
+		space->chatab = ft_split(current->str, 31);
+		if (ft_strncmp(space->chatab[0], "echo", 5) == 0)
+			echo(space->chatab, space);
+		free_all(space->chatab);
+		space->chatab = NULL;
+		current = space->crust->next;
+	}
+}
+
+void	echo_norme(int i, int k, char **compare)
+{
+	
 }
