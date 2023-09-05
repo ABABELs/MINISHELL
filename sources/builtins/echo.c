@@ -6,13 +6,13 @@
 /*   By: arthurabel <arthurabel@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:56:03 by aabel             #+#    #+#             */
-/*   Updated: 2023/09/05 15:31:10 by arthurabel       ###   ########.fr       */
+/*   Updated: 2023/09/05 16:17:36 by arthurabel       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	echo(t_data *data, char **args)
+void	ft_echo(t_data *data, char **args)
 {
 	int	i;
 	int	line;

@@ -6,7 +6,7 @@
 #    By: arthurabel <arthurabel@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/05 15:24:20 by ljerinec          #+#    #+#              #
-#    Updated: 2023/09/05 12:43:02 by arthurabel       ###   ########.fr        #
+#    Updated: 2023/09/05 16:38:46 by arthurabel       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,8 @@ SOURCES =	sources/main.c \
 			sources/builtins/env.c \
 			sources/builtins/pwd.c \
 			sources/builtins/unset.c \
+			sources/builtins/export.c \
+			sources/builtins/exit.c \
 
 OBJ_DIR = object/
 OBJECTS = $(patsubst %.c, %.o, $(SOURCES))

@@ -6,7 +6,7 @@
 /*   By: arthurabel <arthurabel@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:22:51 by aabel             #+#    #+#             */
-/*   Updated: 2023/09/05 14:16:03 by arthurabel       ###   ########.fr       */
+/*   Updated: 2023/09/05 16:16:26 by arthurabel       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 // 	}
 // }
 
-void	pwd(void)
+void	pwd(t_data *data)
 {
 	char	buffer[4096];
 	// On suppose une taille maximale de chemin de 4096

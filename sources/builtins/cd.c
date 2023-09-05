@@ -6,7 +6,7 @@
 /*   By: arthurabel <arthurabel@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 23:25:40 by aabel             #+#    #+#             */
-/*   Updated: 2023/09/05 15:38:05 by arthurabel       ###   ########.fr       */
+/*   Updated: 2023/09/05 16:19:24 by arthurabel       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	cd(t_data *data, char **args)
 {
 	char	*path;
 
+	(void)data;
     // Si un chemin est fourni en argument, l'utiliser
 	if (args[1])
 		path = args[1];
@@ -25,7 +26,8 @@ void	cd(t_data *data, char **args)
 		path = getenv("HOME");
 		if (!path)
 		{
-			write(STDERR_FILENO, "Error: HOME environment variable not set\\n", strlen("Error: HOME environment variable not set\\n"));
+			write(STDERR_FILENO, "Error: HOME environment variable not set\\n",
+				strlen("Error: HOME environment variable not set\\n"));
 			return ;
 		}
 	}
@@ -33,7 +35,8 @@ void	cd(t_data *data, char **args)
 	if (chdir(path) != 0)
 	{
 		// Gérer les erreurs, par exemple si le répertoire n'est pas trouvé
-		write(STDERR_FILENO, "Error: Failed to change directory\\n", strlen("Error: Failed to change directory\\n"));
+		write(STDERR_FILENO, "Error: Failed to change directory\\n",
+			strlen("Error: Failed to change directory\\n"));
 	}
 }
 

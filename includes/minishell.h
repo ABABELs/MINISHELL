@@ -6,7 +6,7 @@
 /*   By: arthurabel <arthurabel@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 15:35:31 by ljerinec          #+#    #+#             */
-/*   Updated: 2023/09/05 13:50:07 by arthurabel       ###   ########.fr       */
+/*   Updated: 2023/09/05 16:40:28 by arthurabel       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,12 @@ void		ft_print_tab(char **array);
 void		check_redir_files(t_data *big_data);
 
 // babels
-void		pwd(t_space *space);
+void		pwd(t_data *data);
 void		unset(t_data *data, char *var_to_unset);
+void		export(t_data *data, char **args);
+void		cd(t_data *data, char **args);
+void		ft_echo(t_data *data, char **args);
+void		env(t_data *data);
+void		exit_minishell(t_data *data, char **args);
 
 #endif
