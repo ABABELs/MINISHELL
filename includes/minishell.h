@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljerinec <ljerinec@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arthurabel <arthurabel@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 15:35:31 by ljerinec          #+#    #+#             */
-/*   Updated: 2023/09/04 17:49:11 by ljerinec         ###   ########.fr       */
+/*   Updated: 2023/09/05 13:50:07 by arthurabel       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,5 +163,9 @@ void		ft_print_tab(char **array);
 
 // parsing/file_and_redir.c
 void		check_redir_files(t_data *big_data);
+
+// babels
+void		pwd(t_space *space);
+void		unset(t_data *data, char *var_to_unset);
 
 #endif

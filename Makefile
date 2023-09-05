@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ljerinec <ljerinec@student.42.fr>          +#+  +:+       +#+         #
+#    By: arthurabel <arthurabel@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/05 15:24:20 by ljerinec          #+#    #+#              #
-#    Updated: 2023/09/04 15:53:49 by ljerinec         ###   ########.fr        #
+#    Updated: 2023/09/05 12:43:02 by arthurabel       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,11 @@ SOURCES =	sources/main.c \
 			sources/parsing/file_and_redir.c \
 			sources/ast/setup_ast.c \
 			sources/freeing/free_chainlink.c \
+			sources/builtins/cd.c \
+			sources/builtins/echo.c \
+			sources/builtins/env.c \
+			sources/builtins/pwd.c \
+			sources/builtins/unset.c \
 
 OBJ_DIR = object/
 OBJECTS = $(patsubst %.c, %.o, $(SOURCES))
